@@ -18,5 +18,14 @@
     <ClCompile Include="顺序结构程序设计.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="选择结构程序设计.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="循环结构程序设计.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="数组.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

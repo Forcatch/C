@@ -4,7 +4,7 @@
 #include<math.h>
 
 //1.从键盘上输入一个大写字母，要求改用小写字母输出
-void test1()
+static void test1()
 {
 	
 	printf("请输入一个大写字母,输入数字1退出\n");
@@ -32,7 +32,7 @@ void test1()
 }
 
 //2.编写程序，求方程ax^2+bx+c=0的解x
-void test2()
+static void test2()
 {
 	float a = 0, b = 0, c = 0;
 	printf("请输出二次方程的a\n");
@@ -61,7 +61,7 @@ void test2()
 //3.请编写一个程序，能显示出以下两行字。
 //I am a student. 
 //I love China.
-void test3()
+static void test3()
 {
 	const char * str1= "I am a student";
 	char str2[20] = "I love China";
@@ -69,12 +69,12 @@ void test3()
 	system("pause");
 }
 
-int main()
-{
-	//test1();
-	//test2();
-	test3();
-
-
-	return(0);
-}
+//int main()
+//{
+//	//test1();
+//	//test2();
+//	//test3();
+//
+//
+//	return(0);
+//}
