@@ -393,7 +393,7 @@ void test17()
 
 
 
-int main()
+int main4()
 {
 	//test01();
 	//test02();
