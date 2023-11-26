@@ -13,7 +13,7 @@ static void test1()
 	}
 	/*for (int i = 0; i < 10; i++)
 	{
-		for (int j = i+1;	j <10 ; j++)
+		for (int j = 0;	j <10-i ; j++)
 		{
 			if (a[j]<a[i])
 			{
@@ -272,7 +272,7 @@ static void test9()
 }
 
 
-int main()
+int main5()
 {
 	//test1();
 	//test2();
