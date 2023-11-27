@@ -340,7 +340,7 @@ static void test12()
 
 }
 
-int main()
+int main6()
 {
 	//test1();
 	//test2();

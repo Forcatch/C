@@ -130,9 +130,13 @@
   <ItemGroup>
     <ClCompile Include="函数.cpp" />
     <ClCompile Include="循环结构程序设计.cpp" />
+    <ClCompile Include="指针.cpp" />
     <ClCompile Include="数组.cpp" />
+    <ClCompile Include="文件.cpp" />
+    <ClCompile Include="结构体与共用体.cpp" />
     <ClCompile Include="选择结构程序设计.cpp" />
     <ClCompile Include="顺序结构程序设计.cpp" />
+    <ClCompile Include="预处理.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
