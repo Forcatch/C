@@ -366,7 +366,7 @@ static void test12()
 
 
 
-int main()
+int main9()
 {
 	//test1();
 	//test2();
