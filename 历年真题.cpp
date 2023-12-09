@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
-
+#include<string>
 /////////////////////////////2011年真题//////////////////////////////
 //1.编写程序，输入任意8个实数存于数组a中，要求输出其中最大数和最小数。（20分）
 static void test11()
@@ -132,12 +132,153 @@ static void test24()
 
 }
 
+/////////////////////////////2013年真题//////////////////////////////
+//1.写一个函数，使给定的一个3x3的二维整型数组转置，即行列互换。要求：该数组的各元素值在程序运行时由键盘输入，主函数调用该函数之后实现行列互换，并在屏幕上显示转换
+//前后的数组，且该函数不采用指针的方法实现。
+static void reverse(int a[3][3])
+{
+	int b[3][3];
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			b[j][i] = a[i][j];
+		}
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			a[i][j] = b[i][j];
+			printf("%d", a[i][j]);
+		}
+	}
+}
+static void test31()
+{
+	int a[3][3] = { 0 };
+	printf("输入一个3x3的二维矩阵，一个一个输入:");
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			scanf("%d", &a[i][j]);
+		}
+	}
+	reverse(a);
+}
+//2.用选择法对10个整数由小到大排列，要求：将这10个整数存放在数组中，并在程序运行时由键盘任意输入。
+static void test32()
+{
+	printf("请输入10个整数，一个一个输入");
+	int a[10];
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%d", a[i]);
+	}
+	int index = 0;
+	for (int i = 0; i < 9; i++)
+	{
+		index = i;
+		for (int j = i + 1; j < 10; j++)
+		{
+			if (a[j] < a[index])
+			{
+				index = j;
+			}
+		}
+		if (i == index)
+		{
+			continue;
+		}
+		else
+		{
+			int temp = a[i];
+			a[i] = a[index];
+			a[index] = temp;
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d ", a[i]);
+	}
+}
+
+//3.编程序求解下列猴子吃桃问题。猴子第1天摘下若干桃子，当即吃了一半，还不过瘾，又多吃了一个。第2天早上又将剩下的桃子吃掉一半，又多吃了一个。以后每天
+//早上都吃了前一天剩下的一半零一个。到第10天早上想再吃时，就只剩下一个桃子了。求第一天共摘多少个桃子。
+static void test33()
+{
+	int x = 1;
+	for (int i = 9; i > 0; i--)
+	{
+		x = (x + 1) * 2;
+	}
+	printf("第一天摘下%d个桃子\n", x);
+}
+static void test34()
+{
+	int x = 1534;
+	for (int i = 1; i < 10; i++)
+	{
+		x = x / 2 - 1;
+	}
+	printf("剩下%d个桃子\n", x);
+}
+
+//4.输入3个字符串，按由小到大的顺序输出，要求函数调用，用指针的方法实现。
+#define MAX_BUFF 1024
+static void sortOutput(const char* a, const char* b, const char* c)
+{
+	const char* temp[3];
+	temp[0] = a;
+	temp[1] = b;
+	temp[2] = c;
+	int index = 0;
+	//在字符指针数组中使用选择排序
+	for (int i = 0; i < 3; i++)
+	{
+		index = i;
+		for (int j = i + 1; j < 3; j++)
+		{
+			if (strcmp(temp[j], temp[index]) < 0)
+			{
+				index = j;
+			}
+		}
+		if (index != i)
+		{
+			const char* p = temp[i];
+			temp[i] = temp[index];
+			temp[index] = p;
+		}
+
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		puts(temp[i]);
+	}
+
+
+}
+static void test35()
+{
+	char a[MAX_BUFF], b[MAX_BUFF], c[MAX_BUFF];
+	printf("输入三个字符串，以回车结束。\n");
+	gets_s(a);
+	gets_s(b);
+	gets_s(c);
+	printf("排序后的结果为：\n");
+	sortOutput(a, b, c);
+}
 int main()
 {
 	//test2();
 	//test21();
 	//test22();
 	//test23();
-	test24();
+	//test24();
+	//test32();
+	//test34();
+	test35();
 	return 0;
 }
