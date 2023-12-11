@@ -270,6 +270,126 @@ static void test35()
 	printf("排序后的结果为：\n");
 	sortOutput(a, b, c);
 }
+
+/////////////////////////////2014年真题//////////////////////////////
+//1.马克思在《数学手稿》中提出如下问题：有30个人（包括男人，女人，小孩）在一家饭店吃饭共花50先令，其中每个男人花3先令，每个女人花2先令，
+//每个小孩花1先令，问男人，女人，小孩各有多少人？用for循环语句编写完整的C程序进行求解，输出所有的可能的组合方式。
+static void test41()
+{
+	int x, y, z;
+	for (x = 0; x < 17; x++)//男人不超过17个
+	{
+		for (y = 0; y < 25; y++)
+		{
+			z = 30 - x - y;
+			if (3 * x + 2 * y + z == 50)
+			{
+				printf("man:%2d woman:%2d kid:%2d\n", x, y, z);
+			}
+		}
+	}
+
+}
+//2.用起泡法对数组中10个整数按照从小到大排序。要求：（1）10个整数从键盘输入，在主函数中给出；（2）排序功能用单独的函数实现；（3）在主函数中
+//输出排序前后的数据列结果
+static void sort(int a[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n - 1 - i; j++)
+		{
+			if (a[j] > a[j + 1])
+			{
+				int temp = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = temp;
+			}
+		}
+	}
+}
+
+static void test42()
+{
+	int a[10];
+	printf("input ten number,one by one and press enter.\n");
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%d", &a[i]);
+	}
+	//排序
+	sort(a, 10);
+	//输出排序后的数组
+	printf("输出排序后的数组:\n");
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d ", a[i]);
+	}
+
+}
+//3.输入一个字符串（长度不超过100），判断其是否为回文。注：所谓回文字符是指从左到右读和从右到左读完全相同的字符串。编写完整的C程序实现以上功能
+#define MAXSTR 101
+static void test43()
+{
+	char a[MAXSTR] = { 0 };
+	char b[MAXSTR] = { 0 };
+	printf("input a string less than 100\n");
+	scanf("%s", a);
+	int len = strlen(a);
+	int i;
+	for (i = 0; i < len; i++)
+	{
+		b[i] = a[len - 1 - i];
+	}
+	b[i] = '\0';
+	if (strcmp(a, b) == 0)
+	{
+		printf("%s是回文。\n", a);
+	}
+	else
+	{
+		printf("%s不是回文.\n", a);
+	}
+
+}
+//4.利用公式 编写程序计算pai的近似值，当某一项的值小于10^-5时，认为达到精度要求。
+static void test44()
+{
+	float pai = 0, x = 1, sum = x;
+	float i = 1.0;
+	while (x > pow(10, -5))
+	{
+		x *= (i / (2 * i + 1));
+		i += 1;
+		sum += x;
+	}
+	pai = sum * 2;
+	printf("pai=%f\n", pai);
+}
+
+//5.用递归函数方法求n阶勒让德多项式的值，递归公式为：
+//     =1                                       (n=0)
+//pn(x)=x                                       (n=1)
+//     =((2n-1)*x*pn-1(x)-(n-1)*pn-2(x))/n      (n>=1)
+static float p(int n, float x)
+{
+	if (n == 0)
+	{
+		return 1;
+	}
+	if (n == 1)
+	{
+		return x;
+	}
+	return ((2 * n - 1) * x * p(n - 1, x) - (n - 1) * p(n - 2, x)) / n;
+}
+static void test45()
+{
+	int n;
+	float x, pn_x;
+	scanf("%d %f", &n, &x);
+	pn_x = p(n, x);
+	printf("Pn(x)=%f", pn_x);
+}
 int main()
 {
 	//test2();
@@ -279,6 +399,11 @@ int main()
 	//test24();
 	//test32();
 	//test34();
-	test35();
+	//test35();
+	//test41();
+	//test42();
+	//test43();
+	//test44();
+	test45();
 	return 0;
 }
