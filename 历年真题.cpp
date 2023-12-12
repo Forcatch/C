@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include<stdio.h>
 #include<string>
+#include<math.h>
 /////////////////////////////2011年真题//////////////////////////////
 //1.编写程序，输入任意8个实数存于数组a中，要求输出其中最大数和最小数。（20分）
 static void test11()
@@ -390,6 +391,193 @@ static void test45()
 	pn_x = p(n, x);
 	printf("Pn(x)=%f", pn_x);
 }
+
+
+
+/////////////////////////////2015年真题//////////////////////////////
+//1.有2，4，6，8个数字，能组成多少个互不相同且无重复数字的三位数？都是多少？请编程输出所有的这些三位数及他们的总个数。
+static void test51()
+{
+	int a[4] = { 2,4,6,8 }; //也可以直接在for语句中第二个表达式加条件
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			for (int z = 0; z < 4; z++)
+			{
+				if (a[i] != a[j] && a[i] != a[z] && a[j] != a[z])
+				{
+					printf("%d", a[i] * 100 + a[j] * 10 + a[z]);
+				}
+			}
+		}
+	}
+}
+//2.用选择法对10个整数由小到大排序，要求：将10个整数存放在数组中，并在程序运行时由键盘任意输入，并在屏幕上输出排序前后的整数序列
+static void test52()
+{
+	int a[10];
+	printf("input ten number,one by one and press enter.\n");
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%d", &a[i]);
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		int index = i;
+		for (int j = i + 1; j < 10; j++)
+		{
+			if (a[index] > a[j])
+			{
+				index = j;
+			}
+		}
+		if (index != i)
+		{
+			int temp = a[index];
+			a[index] = a[i];
+			a[i] = temp;
+		}
+	}
+	printf("排序后的数组为：");
+	for (int i = 0; i < 10; i++)
+	{
+		printf("%d ", a[i]);
+	}
+}
+
+//3.请输入星期几的第一个字母（大写字母）来判断一下是星期几，如果第一个字母一样，则继续判断第二个字母（小写），当按Y时结束判断。编写
+//完整的C程序实现以上功能。
+static void test53()
+{
+	char x;
+	printf("请输入一个字母(大写)：\n");
+	scanf("%c", &x);
+	while (x != 'Y')
+	{
+		switch (x)
+		{
+		case 'M':
+			printf("星期一.\n");
+			break;
+		case 'T':
+			char t;
+			printf("输入第二位小写字母:");
+			scanf("%c", &t);
+			if (t == 'u')
+			{
+				printf("星期二.\n");
+			}
+			else if (t == 'h')
+			{
+				printf("星期四.\n");
+			}
+			else
+			{
+				printf("输入错误，请重新开始输入.");
+			}
+			break;
+		case 'W':
+			printf("星期三.\n");
+			break;
+		case 'F':
+			printf("星期五.\n");
+			break;
+		case 'S':
+			char t;
+			printf("输入第二位小写字母:");
+			scanf("%c", &t);
+			if (t == 'a')
+			{
+				printf("星期六.\n");
+			}
+			else if (t == 'u')
+			{
+				printf("星期天.\n");
+			}
+			else
+			{
+				printf("输入错误，请重新开始输入.");
+			}
+			break;
+		default:
+			printf("输入错误，请重新开始输入.");
+			break;
+		case 'Y':
+			break;
+		}
+		scanf("%c", &x);
+	}
+}
+//4.求方程ax^2+bx+c=0的根，用三个函数分别求当b^2-4ac大于0，等于0和小于0时的根并输出结果。从主函数输入a,b,c的值
+static void f1(float a, float b, float c)
+{
+	float det = b * b - 4 * a * c;
+	float X1 = (-b + sqrt(det)) / (2 * a);
+	float X2 = (-b - sqrt(det)) / (2 * a);
+	printf("X1=%f,X2=%f", X1, X2);
+}
+static void f2(float a, float b, float c)
+{
+	float det = b * b - 4 * a * c;
+	float X = (-b + sqrt(det)) / (2 * a);
+	printf("X1=X2=%f", X);
+}
+static void f3(float a, float b, float c)
+{
+	float det = sqrt(abs(b * b - 4 * a * c));
+	printf("此方程没有实数根.");
+	printf("X1=%f+%fi,X2=%f-%fi", -b / (2 * a), det / (2 * a), -b / (2 * a), det / (2 * a));
+}
+static void test54()
+{
+	float det, x1, x2;
+	float a, b, c;
+	printf("请依次输入a,b,c的值，并用空格分开:\n");
+	scanf("%f %f %f", &a, &b, &c);
+	det = b * b - 4 * a * c;
+	if (det > 0)
+	{
+		f1(a, b, c);
+	}
+	else if (det == 0)
+	{
+		f2(a, b, c);
+	}
+	else
+	{
+		f3(a, b, c);
+	}
+
+}
+
+//5.编写程序，使输入的一个字符串反序存放，在主函数中输入和输出字符串。要求：将输入的字符串存放在字符数组str[100]中；使输入的字符串按反序
+//存放的功能用一个函数（函数名为：inverse）实现；程序中需要适当添加注释。
+static void inverse(char str[])
+{
+	int len = strlen(str);
+	//首尾倒转，用temp传递 最后的空字符还在原位
+	for (int i = 0; i < len / 2; i++)
+	{
+		char temp = str[i];
+		str[i] = str[len - 1 - i];
+		str[len - 1 - i] = temp;
+	}
+}
+
+static void test55()
+{
+	printf("请输入一个字符串.长度不超过99\n");
+	char str[100];
+	scanf("%s", str);
+	//反转字符串函数
+	inverse(str);
+	printf("反转后的字符串为：\n");
+	//输入字符串
+	printf("%s", str);
+}
+
+
 int main()
 {
 	//test2();
