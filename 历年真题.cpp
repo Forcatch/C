@@ -576,7 +576,74 @@ static void test55()
 	//输入字符串
 	printf("%s", str);
 }
+/////////////////////////////2016年真题//////////////////////////////
+//1.求数列1-1/3+1/5-1/7+1/9-……前20项之和。要求保留小数点后两位有效数字。
+static void test61()
+{
+	float x, sum = 0;
+	int flag = 1;
+	for (int i = 0; i < 20; i++)
+	{
+		x = flag * (1 / (2 * (float)i + 1));
+		sum += x;
+		flag *= -1;
+	}
+	printf("sum=%.2f\n", sum);
+}
+//2.输入一个长度不超过100的字符串，采用起泡法将字符串中包含的各个字符按照ASCII值从小到大进行排序，并将排序后的结果输出。
+//要求：字符串存放在数组中，字符串的输入和输出在主函数main中实现，“起泡法”排序在自定义函数sort中实现。
+#define MAX_LEN 100
+static void sortQiPao(char a[], int len)
+{
+	for (int i = 0; i < len; i++)
+	{
+		for (int j = 0; j < len - 1 - i; j++)
+		{
+			if (a[j] > a[j + 1])
+			{
+				char str = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = str;
+			}
+		}
+	}
+}
+static void test62()
+{
+	char a[101] = { 0 };
+	printf("输入一个长度不超过100的字符串:\n");
+	gets_s(a);
+	/*排序函数*/
+	int len = strlen(a);
+	sortQiPao(a, len);
+	/*输出*/
+	puts(a);
+}
+//3.输入一个长度不超过100的字符串，然后输入一个字符，通过程序将字符串中该字符删除，并输出最后的字符串。
+//要求：字符串存放在数组中，字符串的输入和输出在主函数main中实现，删除字符在自定义函数deletechar中实现。
+static void deletechar(char a[], int len, char str)
+{
+	for (int i = 0, j = 0; i < len + 1; i++) /*空字符也要赋值进去*/
+	{
+		a[j] = a[i];
+		if (a[i] == str)
+			continue;
+		j++;
+	}
+}
+static void test63()
+{
+	printf("输入一个不超过100个字符的字符串");
+	char a[MAX_LEN] = { 0 };
+	gets_s(a);
+	printf("输入要删除的字符:");
+	char str;
+	scanf("%c", str);
+	deletechar(a, strlen(a), str);
+	printf("删除%c后的字符串为:", str);
+	puts(a);
 
+}
 
 int main()
 {
