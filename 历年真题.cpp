@@ -484,7 +484,6 @@ static void test53()
 			printf("星期五.\n");
 			break;
 		case 'S':
-			char t;
 			printf("输入第二位小写字母:");
 			scanf("%c", &t);
 			if (t == 'a')
@@ -637,16 +636,97 @@ static void test63()
 	char a[MAX_LEN] = { 0 };
 	gets_s(a);
 	printf("输入要删除的字符:");
-	char str;
-	scanf("%c", str);
+	char str = 0;
+	scanf("%c", &str);
 	deletechar(a, strlen(a), str);
 	printf("删除%c后的字符串为:", str);
 	puts(a);
+	int c = 0;
 
 }
+/////////////////////////////2017年真题//////////////////////////////
+//1.编写C程序求1+3+5+……+（2n-1）的值。要求n是通过键盘输入确定。
+static void test71()
+{
+	int n = 0, sum = 0;
+	printf("输入n的值:");
+	scanf("%d", &n);
+	for (int i = 1; i <= n; i++)
+	{
+		sum += 2 * i - 1;
+	}
+	printf("sum=%d", sum);
+}
+//2.编写函数用来求任意两个实数中的最大数。要求通过主函数调用编写的求最大函数实现，两个实数用键盘输入
+static void FMax(float a, float b)
+{
+	if (a > b)
+	{
+		printf("最大数为%f", a);
+	}
+	else
+	{
+		printf("最大数为%f", b);
+	}
+}
+static void test72()
+{
+	float a, b;
+	printf("输入两个实数a,b。\n");
+	scanf("%f %f", &a, &b);
+	FMax(a, b);
+}
+//3.写一个函数，使给定的一个二维整型数组b[3][3]，通过键盘赋初值，然后对他进行行列转换，并输出转换结果
+static void test73()
+{
+	int b[3][3], temp[3][3];
+	printf("请输入一个3*3的二维数组，一个一个输入并按回车\n");
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			scanf("%d", &b[i][j]);
+			temp[j][i] = b[i][j];
+		}
+	}
+	printf("转置后的结果为:\n");
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			b[i][j] = temp[i][j];
+			printf("%d", b[i][j]);
+		}
+		printf("\n");
+	}
+}
 
+//4.用函数递归的方式求费波纳希数列第n项Fn.这个数列有如下特点：第1，2两个数为1，1.从第三个数开始，该数是其前面两个数之和。（要求n由键盘输入）
+//F1=1            (n=1)
+//F2=1            (n=2)
+//Fn=Fn-1+Fn-2    (n>=3)
+static int F(int n)
+{
+	if (n == 1)
+	{
+		return 1;
+	}
+	if (n == 2)
+	{
+		return 1;
+	}
+	return F(n - 1) + F(n - 2);
+}
+static void test74()
+{
+	printf("请输入n的值：");
+	int n = 0;
+	scanf("%d", &n);
+	int x = F(n);
+}
 int main()
 {
+	srand((unsigned int)time(NULL));
 	//test2();
 	//test21();
 	//test22();
@@ -659,6 +739,8 @@ int main()
 	//test42();
 	//test43();
 	//test44();
-	test45();
+	//test45();
+	//test63();
+
 	return 0;
 }
