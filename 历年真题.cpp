@@ -724,6 +724,113 @@ static void test74()
 	scanf("%d", &n);
 	int x = F(n);
 }
+/////////////////////////////2018年真题//////////////////////////////
+//1.有1020个西瓜，第一天卖一半多两个，以后每天卖剩下的一半多两个，编写程序统计卖完西瓜所需天数，并输出天数
+static void test81()
+{
+	int x = 1020;
+	int n = 0;
+	while (x > 0)
+	{
+		x = x / 2 - 2;
+		n++;
+	}
+	printf("卖掉1020个西瓜需要%d天", n);
+}
+//2.编写程序，在主函数中输入两个整型数，并按先大后小的顺序输出这两个数，要求：定义一个函数swap处理数据值的交换，并且用指针类型
+//的数据作为函数的参数；在主函数中调用数据值交换函数swap。
+static void swap(int* a, int* b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+static void test82()
+{
+	printf("请输入两个数，并用空格隔开:");
+	int a = 0, b = 0;
+	scanf("%d %d", &a, &b);
+	swap(&a, &b);
+	if (a > b)
+	{
+		printf("%d %d", a, b);
+	}
+	else
+	{
+		printf("%d %d", b, a);
+	}
+
+}
+
+//3.编写程序，使输入的一个字符串反序存放，在主函数中输入和输出字符串。要求：将输入的字符串放在字符数组str[100]中；使输入的字符串按
+//反序存放的功能用一个函数实现，函数名为inverse。
+static void inverse(char str[], int len)
+{
+	for (int i = 0; i < len / 2; i++)
+	{
+		char temp = str[i];
+		str[i] = str[len - 1 - i];
+		str[len - 1 - i] = temp;
+	}
+}
+static void test83()
+{
+	printf("请输入一个长度不到100的字符串:");
+	char str[MAX_LEN];
+	gets_s(str);
+	inverse(str, strlen(str));
+	puts(str);
+
+}
+
+//4.定义一个可存储50个元素的数组score，从键盘上录入50个学生的数学成绩，并将其存放在数组score中，计算并输出这些学生们这门课的平均成绩，
+//最高分，最低分。要求：分别编写求数组平均成绩，最高分，最低分的函数，函数名依次为：f_aver , f_max , f_min;在主程序中调用f_aver ,
+// f_max , f_min函数计算该门课的平均成绩，最高分，最低分并输出。
+static float f_aver(float score[], int count = 50)
+{
+	float sum = 0;
+	for (int i = 0; i < count; i++)
+	{
+		sum += score[i];
+	}
+	return (sum / count);
+}
+static float f_max(float score[], int count = 50)
+{
+	float max = 0;
+	for (int i = 0; i < 50; i++)
+	{
+		if (max < score[i])
+		{
+			max = score[i];
+		}
+	}
+	return max;
+}
+static float f_min(float score[], int count = 50)
+{
+	float min = 0;
+	for (int i = 0; i < 50; i++)
+	{
+		if (min > score[i])
+		{
+			min = score[i];
+		}
+	}
+	return min;
+}
+static void test84()
+{
+	float score[50];
+	printf("请输入50个学生的数学成绩,一个一个输入并且按回车:");
+	for (int i = 0; i < 50; i++)
+	{
+		scanf("%f", &score[i]);
+	}
+
+	printf("average=%f,max=&f,min=%f", f_aver(score), f_max(score), f_min(score));
+
+}
 int main()
 {
 	srand((unsigned int)time(NULL));
