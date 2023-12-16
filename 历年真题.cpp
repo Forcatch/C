@@ -831,6 +831,123 @@ static void test84()
 	printf("average=%f,max=&f,min=%f", f_aver(score), f_max(score), f_min(score));
 
 }
+/////////////////////////////2019年真题//////////////////////////////
+//1.每个苹果0.5元，每个梨0.8元，需买苹果的个数是梨个数的两倍。求100元最多能买的苹果和梨的数量
+static void test91()
+{
+	int x = 0, y = 0;
+	for (x = 0; x < 200; x++)
+	{
+		y = 2 * x;
+		if (0.5 * (float)x + 0.8 * (float)y == 100)
+		{
+			printf("苹果=%d,梨=%d", x, y);
+		}
+	}
+}
+//2.编写程序，通过键盘输入一个3*3的矩阵，并输出这个矩阵的对角线元素之和
+static void test92()
+{
+	printf("请输入3*3的矩阵,一个一个输入并且按回车:");
+	float a[3][3] = { 0 }, sum = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			scanf("%f", &a[i][j]);
+			if (i == j || i + j == 2)
+			{
+				sum += a[i][j];
+			}
+		}
+	}
+
+	printf("对角线之和为：", sum);
+
+}
+//3.有一个一维数组array[10]，编写程序，求数组元素的平均值。要求：求数组元素的平均值的功能用一个函数average实现；在主函数中实现数组输入
+//并输出所求得的平均值（平均值按两位小数输出）。
+static float average(float a[], int len)
+{
+	float sum = 0;
+	for (int i = 0; i < len; i++)
+	{
+		sum += a[i];
+	}
+	return (sum / len);
+}
+static void test93()
+{
+	float array[10] = { 0 };
+	printf("请输入长度为10的数组：");
+	for (int i = 0; i < 10; i++)
+	{
+		scanf("%f", &array[i]);
+	}
+	float aver = average(array, 10);
+	printf("average=%.2f", aver);
+}
+//4.有n个人围成一圈，顺序排号，从第一个人开始报数，从1.2.3.…………，一直报下去，凡是报到5和5的倍数的人退出圈子。问最后留下的是原来的第几号？
+//要求：编写一个函数left求解，n值由main函数输入（n的值小于100），并通过实参传递给函数，最后的结果由main函数输出
+static int left(int n)
+{
+	int a[100], i;
+	//初始设为存活状态
+	for (i = 0; i < n; i++)
+	{
+		a[i] = 1;
+	}
+	int alive = 0;
+	int count = 0;
+	while (1)
+	{
+		int flag = 0;
+		//每轮叫号
+		for (int j = 0; j < n; j++)
+		{
+			//当这个人没有被置为0（还活着）则报数
+			if (a[j] != 0)
+			{
+				a[j] = ++count;
+			}
+			//当序号为5的倍数时被置为0
+			if (count % 5 == 0)
+			{
+				a[j] = 0;
+			}
+		}
+		//每轮叫号结束检查剩余存活人数
+		for (int j = 0; j < n; j++)
+		{
+			if (a[j] != 0)
+			{
+				flag++;
+			}
+		}
+		//当剩余最后一个人时结束循环
+		if (flag == 1)
+		{
+			break;
+		}
+	}
+	for (int j = 0; j < n; j++)
+	{
+		if (a[j] != 0)
+		{
+			alive = j + 1;
+		}
+	}
+	return alive;
+}
+static void test94()
+{
+	int n;
+	printf("请输入n的值:n=");
+	scanf("%d", &n);
+	printf("最后存活者为：%d", left(n));
+
+}
+
 int main()
 {
 	srand((unsigned int)time(NULL));
