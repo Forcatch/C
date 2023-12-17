@@ -835,15 +835,11 @@ static void test84()
 //1.每个苹果0.5元，每个梨0.8元，需买苹果的个数是梨个数的两倍。求100元最多能买的苹果和梨的数量
 static void test91()
 {
-	int x = 0, y = 0;
-	for (x = 0; x < 200; x++)
-	{
-		y = 2 * x;
-		if (0.5 * (float)x + 0.8 * (float)y == 100)
-		{
-			printf("苹果=%d,梨=%d", x, y);
-		}
-	}
+	int pear = 0;
+	while (0.8 * pear + 0.5 * 2 * pear < 100)
+		pear++;
+	printf("apple=%d,pear=%d", (pear - 1)*2,pear-1)
+	
 }
 //2.编写程序，通过键盘输入一个3*3的矩阵，并输出这个矩阵的对角线元素之和
 static void test92()
@@ -946,6 +942,43 @@ static void test94()
 	scanf("%d", &n);
 	printf("最后存活者为：%d", left(n));
 
+}
+
+/////////////////////////////2017年复试真题//////////////////////////////
+//1.已知：函数set函数原型为void set(int a[],int length,int b[]),其功能是：编写函数把数组中所有奇数放在另一个数组中返回。编制该函数
+void set(int a[], int length, int b[])
+{
+	for (int i = 0, j = 0; i < length; i++)
+	{
+		if (a[i] % 2 == 1)
+		{
+			b[j++] = a[i];
+		}
+	}
+}
+//2.已知：函数delete函数原型为int delete(int data[10],int n,int key),其功能是删除升序数组data中的指定元素key(假设无相同值的元素),n为
+//数组data的元素个数，函数返回删除后的数组data元素个数。编制该函数。
+int Delete(int data[10], int n, int key)
+{
+	int num = n;
+	for (int i = 0, j = 0; i < n || j < n; i++)
+	{
+		//防止key出现在最后或者最后的几个元素没被覆盖，最后全部覆盖为0
+		if (i >= n)
+		{
+			data[j++] = 0;
+			continue;
+		}
+
+		data[j] = data[i];
+		if (data[i] == key)
+		{
+			continue; //当数组数组出现key时，后面的数覆盖前面的
+			num--;
+		}
+		j++;
+	}
+	return num;
 }
 
 int main()
