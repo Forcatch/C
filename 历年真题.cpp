@@ -980,7 +980,58 @@ int Delete(int data[10], int n, int key)
 	}
 	return num;
 }
+/////////////////////////////2018年复试真题//////////////////////////////
+//1.编写函数利用指向行的指针变量求5x3数组各行元素之和。
+float ArraySum(float(*p)[5])
+{
+	float sum = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		sum = 0;
+		for (int j = 0; j < 3; j++)
+		{
+			sum += p[i][j];
+		}
+		printf("第%d行和=%f", i + 1, sum);
+	}
+}
+//2.已知：输入一串数字字符串，假设字符串长度不超过40个字符，数据间用空格隔开，把字符串里数字字符转化成对应的数字，每一个数字存在一个单向动态链表（简称数字链表）里的
+//一个节点里，函数原型如下：
+//struct number*create_number_list(char*a)
+#define MAXSTR_LEN 40
+struct number
+{
+	int c;
+	struct number* next;
+};
+struct number* create_number_list(char* a)
+{
+	char str[MAXSTR_LEN + 1] = { 0 };
+	char temp[MAXSTR_LEN + 1] = { 0 };
+	strncpy(str, a, MAXSTR_LEN);//拷贝最多40个字符串到str
+	int i = 0;
+	//用于创建数字链表
+	struct number* head = (struct number*)malloc(sizeof(struct number));
+	struct number* p, * ph;
+	ph = head;
+	while (*(str + i) != 0)
+	{
+		*(temp + i) = *(str + i);
+		//碰到空格时创建链表
+		if (*(str + i) == '\n')
+		{
+			int x = atoi(temp);
+			p = (struct number*)malloc(sizeof(struct number));
+			ph->c = x;
+			ph->next = p;
+			ph = p;
+			memset(temp, 0, sizeof(temp));
+		}
+		i++;
+	}
+	return head;
 
+}
 int main()
 {
 	srand((unsigned int)time(NULL));
