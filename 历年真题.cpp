@@ -993,6 +993,7 @@ float ArraySum(float(*p)[5])
 			sum += p[i][j];
 		}
 		printf("第%d行和=%f", i + 1, sum);
+		return sum;
 	}
 }
 //2.已知：输入一串数字字符串，假设字符串长度不超过40个字符，数据间用空格隔开，把字符串里数字字符转化成对应的数字，每一个数字存在一个单向动态链表（简称数字链表）里的
@@ -1031,6 +1032,55 @@ struct number* create_number_list(char* a)
 	}
 	return head;
 
+}
+/////////////////////////////2019年复试真题//////////////////////////////
+//1.判断101-200之间有多少个素数，并输出所有素数
+static void test191()
+{
+	for (int i = 101; i <= 200; i++)
+	{
+		int flag = 0;
+		for (int j = 2; j < i / 2; j++)
+		{
+			if (i % j == 0)
+			{
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0)
+		{
+			printf("%d", i);
+		}
+	}
+}
+//2.输入三个整数x,y,z，请把这三个数由小到大输出
+static void test192()
+{
+	printf("输入三个数，并用空格隔开：");
+	int a[3];
+	scanf("%d %d %d", &a[1], &a[2], &a[3]);
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = i + 1; j < 3; j++)
+		{
+			if (a[i] > a[j])
+			{
+				int temp = a[i];
+				a[i] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%d ", a[i]);
+	}
+}
+int x = 3;
+int func(int a)
+{
+	return x + a;
 }
 int main()
 {
